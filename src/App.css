@@ -118,6 +118,7 @@ form button {
   border: none;
   font-size: 20px;
   font-family: "Nunito";
+  cursor: pointer;
 }
 
 .report-container {
@@ -126,7 +127,7 @@ form button {
   font-size: 30px;
   /* background-color: #224abe; */
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 90vw;
 }
 
@@ -144,4 +145,5 @@ form button {
   border-radius: 10px;
   padding: 10px;
   padding-left: 40px;
+  margin-top: 20px;
 }
