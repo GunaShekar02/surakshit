@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Web3 from "web3";
 
 import "./App.css";
-import Record from "./abis/Record.json";
 import bell from "./assets/images/bell.png";
 
 const ipfsClient = require("ipfs-http-client");
@@ -27,19 +26,19 @@ class App extends Component {
   }
 
   async componentWillMount() {
-    fetch("http://127.0.0.1:8000/Traffic/default/call/json/final", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
-      }
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response < 5) this.setState({ danger: true });
-        this.setState({ danger: true });
-      })
-      .catch(err => console.log(err));
+    // fetch("http://127.0.0.1:8000/Traffic/default/call/json/final", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Access-Control-Allow-Origin": "*"
+    //   }
+    // })
+    //   .then(response => response.json())
+    //   .then(response => {
+    //     if (response < 5) this.setState({ danger: true });
+    //     this.setState({ danger: true });
+    //   })
+    //   .catch(err => console.log(err));
     await this.loadWeb3();
     await this.loadBlockchainData();
   }
@@ -48,22 +47,55 @@ class App extends Component {
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });
-    const networkId = await web3.eth.net.getId();
-    const networkData = Record.networks[networkId];
-    if (networkData) {
-      const abi = Record.abi;
-      const address = networkData.address;
-      const contract = new web3.eth.Contract(abi, address);
-      this.setState({ contract });
-      const records = await contract.methods.get("wardha").call();
-      this.setState({
-        records
-      });
-    } else {
-      window.alert(
-        "Smart contract not deployed to detected network, please change to a valid network"
-      );
-    }
+    console.log(accounts);
+    const abi = [
+      {
+        inputs: [
+          {
+            internalType: "string",
+            name: "_area",
+            type: "string"
+          }
+        ],
+        name: "get",
+        outputs: [
+          {
+            internalType: "string[]",
+            name: "",
+            type: "string[]"
+          }
+        ],
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        inputs: [
+          {
+            internalType: "string",
+            name: "_recordHash",
+            type: "string"
+          },
+          {
+            internalType: "string",
+            name: "_area",
+            type: "string"
+          }
+        ],
+        name: "set",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function"
+      }
+    ];
+    const address = "0x88a9a29ba10bbec7b90957b8ab7d9a49e2afd552";
+    const contract = new web3.eth.Contract(abi, address);
+    this.setState({ contract });
+    console.log(this.state.contract);
+    const records = await contract.methods.get("wardha").call();
+    console.log(records);
+    this.setState({
+      records
+    });
   }
 
   async loadWeb3() {
