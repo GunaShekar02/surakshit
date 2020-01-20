@@ -95,13 +95,31 @@ class App extends Component {
         outputs: [],
         stateMutability: "nonpayable",
         type: "function"
+      },
+      {
+        inputs: [],
+        stateMutability: "nonpayable",
+        type: "constructor"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: false,
+            internalType: "string",
+            name: "recordHash",
+            type: "string"
+          }
+        ],
+        name: "RecordAdded",
+        type: "event"
       }
     ];
-    const address = "0x88a9a29ba10bbec7b90957b8ab7d9a49e2afd552";
+    const address = "0xc5b72212b675708df83ce438e4c35dde668f1c4b";
     const contract = new web3.eth.Contract(abi, address);
     this.setState({ contract });
     console.log(this.state.contract);
-    const records = await contract.methods.get("wardha").call();
+    const records = await contract.methods.get("morena").call();
     console.log(records);
     this.setState({
       records
@@ -146,7 +164,7 @@ class App extends Component {
           .set(recordHash, this.state.place.toLowerCase())
           .send({ from: this.state.account });
         console.log("receipt", receipt);
-        if (this.state.place === "Wardha")
+        if (this.state.place === "Morena")
           this.setState({
             records: [...this.state.records, recordHash]
           });

@@ -22,11 +22,10 @@ contract("Record", accounts => {
 
   describe("storage", async () => {
     it("updates recordHash", async () => {
-      let recordHash = "abc123";
       let area = "wardha";
-      let expectedResult = ["abc123", "bcs"];
-      await record.set(recordHash, area);
-      await record.set("bcs", area);
+      let expectedResult = ["abc", "def"];
+      await record.set("abc", area);
+      await record.set("def", area);
       const result = await record.get(area);
       for (let i = 0; i < result.length; ++i) {
         assert.equal(result[i], expectedResult[i]);
