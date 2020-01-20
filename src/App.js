@@ -20,7 +20,8 @@ class App extends Component {
       contract: null,
       recordHash: "",
       account: "",
-      records: []
+      records: [],
+      place: ""
     };
   }
 
@@ -41,7 +42,6 @@ class App extends Component {
       const contract = new web3.eth.Contract(abi, address);
       this.setState({ contract });
       const records = await contract.methods.get("wardha").call();
-      console.log(records);
       this.setState({
         records
       });
@@ -72,7 +72,6 @@ class App extends Component {
     reader.readAsArrayBuffer(file);
     reader.onloadend = () => {
       this.setState({ buffer: Buffer(reader.result) });
-      console.log("buffer", this.state.buffer);
     };
   };
 
@@ -82,19 +81,19 @@ class App extends Component {
     ipfs.add(this.state.buffer, async (error, result) => {
       console.log("ipfs result", result);
       const recordHash = result[0].hash;
-      console.log(recordHash);
       if (error) {
         console.log("error ipfs", error);
         return;
       }
       try {
         const receipt = await this.state.contract.methods
-          .set(recordHash, "wardha")
+          .set(recordHash, this.state.place.toLowerCase())
           .send({ from: this.state.account });
         console.log("receipt", receipt);
-        this.setState({
-          records: [...this.state.records, recordHash]
-        });
+        if (this.state.place === "Wardha")
+          this.setState({
+            records: [...this.state.records, recordHash]
+          });
       } catch (err) {
         console.log(err);
       }
@@ -104,9 +103,11 @@ class App extends Component {
   render() {
     const recordCards = this.state.records.map((record, index) => (
       <div className="report-card" key={index}>
-        <div>Document : </div>
+        <div>Case Code : {record}</div>
         <div>
-          <a href={`https://ipfs.infura.io/ipfs/${record}`}>File</a>
+          <a href={`https://ipfs.infura.io/ipfs/${record}`}>
+            Click here to see the record
+          </a>
         </div>
       </div>
     ));
@@ -129,7 +130,13 @@ class App extends Component {
               <form onSubmit={this.onSubmit}>
                 <label>
                   Place of Crime
-                  <input type="text" placeholder="Enter Place of Crime" />
+                  <input
+                    type="text"
+                    placeholder="Enter Place of Crime"
+                    onChange={place =>
+                      this.setState({ place: place.target.value })
+                    }
+                  />
                 </label>
                 <label>
                   Upload Record
