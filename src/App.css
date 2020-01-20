@@ -1,38 +1,147 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+
+  scroll-behavior: smooth;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  overflow-x: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+nav {
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+  height: 10vh;
+  min-height: 100px;
+  /* height: 500px; */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 5;
+  padding-left: 3vw;
+  padding-right: 3vw;
+  transition: all 0.5s ease;
+  overflow: hidden;
+  font-family: "Nunito";
+  font-size: 55px;
+  color: #224abe;
+  font-weight: bold;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.notification-number {
+  position: absolute;
+  top: -23px;
+  right: 4px;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: bold;
+  z-index: 3;
+}
+
+.notification-circle {
+  height: 18px;
+  width: 18px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 30px;
+  right: 70px;
+  z-index: 2;
+}
+
+.container {
+  padding: 10vh;
+  padding-top: 15vh;
+  background-color: #f5f5f5;
+  height: 100vh;
+}
+
+.control-panel {
+  color: #5a5c69;
+  font-size: 45px;
+  font-family: "Nunito";
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.form-container {
+  margin-top: 30px;
+  font-family: "Nunito";
+  font-size: 30px;
+  color: #224abe;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+}
+
+form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin-top: 30px;
+  background-color: #ffffff;
+  width: 90vw;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* align-items: center; */
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-left-width: 5px;
+  border-right-width: 0;
+  border-top-width: 0;
+  border-bottom-width: 0;
+  border-color: #4e73df;
+  border-style: solid;
+  /* justify-content: center; */
+  border-radius: 10px;
+  padding: 30px;
+  padding-left: 40px;
+}
+form label {
+  color: #000000;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+form label input {
+  margin-left: 20px;
+  height: 35px;
+  font-size: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+form button {
+  height: 50px;
+  width: 120px;
+  background-color: #4e73df;
+  color: #ffffff;
+  border-radius: 5px;
+  border: none;
+  font-size: 20px;
+  font-family: "Nunito";
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.report-container {
+  margin-top: 30px;
+  font-family: "Nunito";
+  font-size: 30px;
+  /* background-color: #224abe; */
+  display: flex;
+  flex-direction: row;
+  width: 90vw;
+}
+
+.report-card {
+  height: 150px;
+  width: 50vw;
+  background-color: #ffffff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.16);
+  border-left-width: 5px;
+  border-right-width: 0;
+  border-top-width: 0;
+  border-bottom-width: 0;
+  border-color: #4e73df;
+  border-style: solid;
+  border-radius: 10px;
+  padding: 10px;
+  padding-left: 40px;
 }
