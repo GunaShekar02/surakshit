@@ -128,12 +128,17 @@ form button {
   /* background-color: #224abe; */
   display: flex;
   flex-direction: column;
-  width: 90vw;
+  /* width: 90vw; */
+  flex: 1;
+}
+
+.map-parent {
+  display: flex;
 }
 
 .report-card {
   height: 150px;
-  width: 50vw;
+  width: 40vw;
   background-color: #ffffff;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.16);
   border-left-width: 5px;
@@ -195,4 +200,18 @@ form button {
   font-weight: bold;
   font-family: "Nunito";
   cursor: pointer;
+}
+
+.map-container {
+  margin-top: 50px;
+  background-color: #ffffff;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border-color: #4e73df;
+  border-width: 5px;
+  border-style: solid;
+  display: flex;
+  border-radius: 20px;
+  max-height: 45vh;
 }

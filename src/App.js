@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import Web3 from "web3";
+import ReactMapGL, { Marker } from "react-map-gl";
 
 import "./App.css";
 import bell from "./assets/images/bell.png";
+import marker from "./assets/images/marker.png";
 
 const ipfsClient = require("ipfs-http-client");
 const ipfs = ipfsClient({
@@ -21,7 +23,15 @@ class App extends Component {
       account: "",
       records: [],
       place: "",
-      danger: false
+      danger: false,
+      showMarker: false,
+      viewport: {
+        latitude: 26.2183,
+        longitude: 78.1828,
+        width: "43vw",
+        height: "40vh",
+        zoom: 14
+      }
     };
   }
 
@@ -159,6 +169,7 @@ class App extends Component {
     modal.style.display = "none";
     modal.style.opacity = 0;
     this.setState({ danger: false });
+    this.setState({ showMarker: true });
   };
 
   render() {
@@ -213,7 +224,35 @@ class App extends Component {
               </form>
             </div>
           </div>
-          <div className="report-container">{recordCards}</div>
+          <div className="map-parent">
+            <div className="report-container">{recordCards}</div>
+            <div className="map-container">
+              <div>
+                <ReactMapGL
+                  {...this.state.viewport}
+                  mapboxApiAccessToken="pk.eyJ1IjoiZ3VuYXNoZWthcjAyIiwiYSI6ImNrNW13b3RjajBzcnMzb3BjdnBsamxlN3QifQ.5oMM26gc-p2TAv93L2yuyA"
+                  onViewportChange={viewport => {
+                    this.setState({ viewport });
+                  }}
+                  mapStyle="mapbox://styles/gunashekar02/ck5mx3kc255nd1io9yea10mdo"
+                >
+                  {this.state.showMarker ? (
+                    <Marker latitude={26.2183} longitude={78.1828}>
+                      <div>
+                        <p>MORENA</p>
+                        <img
+                          src={marker}
+                          alt={"Marker"}
+                          height="50px"
+                          width="50px"
+                        ></img>
+                      </div>
+                    </Marker>
+                  ) : null}
+                </ReactMapGL>
+              </div>
+            </div>
+          </div>
           <div id="modal">
             <h1>ALERT!</h1>
             <h2>Very less activity was detected at Sector 45, Morena.</h2>
