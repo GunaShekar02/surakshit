@@ -147,3 +147,52 @@ form button {
   padding-left: 40px;
   margin-top: 20px;
 }
+
+#bell {
+  cursor: pointer;
+}
+
+#modal {
+  position: absolute;
+  /* height: 500px; */
+  width: 800px;
+  background-color: #ffffff;
+  box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.16);
+  top: 400px;
+  left: 800px;
+  border-color: #4e73df;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 5px;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  display: none;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#modal h1 {
+  color: red;
+}
+
+#modal button {
+  height: 80px;
+  width: 200px;
+  background-color: #4e73df;
+  color: #ffffff;
+  border-radius: 5px;
+  border: none;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: "Nunito";
+  cursor: pointer;
+}

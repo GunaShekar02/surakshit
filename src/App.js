@@ -21,11 +21,25 @@ class App extends Component {
       recordHash: "",
       account: "",
       records: [],
-      place: ""
+      place: "",
+      danger: false
     };
   }
 
   async componentWillMount() {
+    fetch("http://127.0.0.1:8000/Traffic/default/call/json/final", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      }
+    })
+      .then(response => response.json())
+      .then(response => {
+        if (response < 5) this.setState({ danger: true });
+        this.setState({ danger: true });
+      })
+      .catch(err => console.log(err));
     await this.loadWeb3();
     await this.loadBlockchainData();
   }
@@ -100,6 +114,21 @@ class App extends Component {
     });
   };
 
+  openModal = () => {
+    if (this.state.danger) {
+      const modal = document.getElementById("modal");
+      modal.style.display = "flex";
+      modal.style.opacity = 1;
+    }
+  };
+
+  closeModal = () => {
+    const modal = document.getElementById("modal");
+    modal.style.display = "none";
+    modal.style.opacity = 0;
+    this.setState({ danger: false });
+  };
+
   render() {
     const recordCards = this.state.records.map((record, index) => (
       <div className="report-card" key={index}>
@@ -115,11 +144,13 @@ class App extends Component {
       <div>
         <nav>
           <div>SURAKSHIT</div>
-          <div>
-            <img src={bell} height="40px" width="40px" alt="bell" />
-            <div className="notification-circle">
-              <p className="notification-number">1</p>
-            </div>
+          <div onClick={this.openModal}>
+            <img src={bell} height="40px" width="40px" alt="bell" id="bell" />
+            {this.state.danger ? (
+              <div className="notification-circle">
+                <p className="notification-number">1</p>
+              </div>
+            ) : null}
           </div>
         </nav>
         <div className="container">
@@ -151,6 +182,13 @@ class App extends Component {
             </div>
           </div>
           <div className="report-container">{recordCards}</div>
+          <div id="modal">
+            <h1>ALERT!</h1>
+            <h2>Very less activity was detected at Sector 45, Morena.</h2>
+            <button type="button" onClick={this.closeModal}>
+              SURAKSHIT
+            </button>
+          </div>
         </div>
       </div>
     );
