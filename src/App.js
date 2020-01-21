@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Web3 from "web3";
 import ReactMapGL, { Marker } from "react-map-gl";
+import Loader from "react-loader-spinner";
 
 import "./App.css";
 import bell from "./assets/images/bell.png";
@@ -25,6 +26,7 @@ class App extends Component {
       place: "",
       danger: false,
       showMarker: false,
+      loading: false,
       viewport: {
         latitude: 26.2183,
         longitude: 78.1828,
@@ -115,7 +117,7 @@ class App extends Component {
         type: "event"
       }
     ];
-    const address = "0xc5b72212b675708df83ce438e4c35dde668f1c4b";
+    const address = "0xd1f48472561ab8b842fc17bab93166ec56e93a90";
     const contract = new web3.eth.Contract(abi, address);
     this.setState({ contract });
     console.log(this.state.contract);
@@ -152,11 +154,13 @@ class App extends Component {
   onSubmit = event => {
     event.preventDefault();
     console.log("submitting form");
+    this.setState({ loading: true });
     ipfs.add(this.state.buffer, async (error, result) => {
       console.log("ipfs result", result);
       const recordHash = result[0].hash;
       if (error) {
-        console.log("error ipfs", error);
+        alert("error ipfs", error);
+        this.setState({ loading: false });
         return;
       }
       try {
@@ -164,12 +168,14 @@ class App extends Component {
           .set(recordHash, this.state.place.toLowerCase())
           .send({ from: this.state.account });
         console.log("receipt", receipt);
+        this.setState({ loading: false });
         if (this.state.place === "Morena")
           this.setState({
             records: [...this.state.records, recordHash]
           });
       } catch (err) {
         console.log(err);
+        this.setState({ loading: false });
       }
     });
   };
@@ -238,7 +244,18 @@ class App extends Component {
                     onChange={this.captureFile}
                   />
                 </label>
-                <button type="submit">Submit</button>
+                <button type="submit">
+                  {this.state.loading ? (
+                    <Loader
+                      type="TailSpin"
+                      color="#ffffff"
+                      height={25}
+                      width={30}
+                    />
+                  ) : (
+                    "SUBMIT"
+                  )}
+                </button>
               </form>
             </div>
           </div>
