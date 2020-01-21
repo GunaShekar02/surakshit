@@ -74,7 +74,7 @@ def postprocess(frame, outs):
         width = box[2]
         height = box[3]
         drawPred(classIds[i], confidences[i], left, top, left + width, top + height)
-        if classIds[i] in [1, 2, 3, 5, 7]:  # 0
+        if classIds[i] in [0, 1, 2, 3, 5, 7]:  # 0
             count = count + 1
 @service.json
 def final():
@@ -105,14 +105,14 @@ def final():
     net.setPreferableBackend(cv.dnn.DNN_BACKEND_OPENCV)
     net.setPreferableTarget(cv.dnn.DNN_TARGET_CPU)
     # if using image then make the output file a jpeg file.
-    outputFile = "applications/Traffic/static/result123.jpg"
+    outputFile = "applications/Traffic/static/output.jpg"
     # Process inputs
     # winName = 'DL OD with OpenCV'
     # cv.namedWindow(winName, cv.WINDOW_NORMAL)
     # cv.resizeWindow(winName, 1000, 1000)
 
     # if using an image, put the path of the image over here.
-    cap = cv.VideoCapture("applications/Traffic/static/car2.jpeg")
+    cap = cv.VideoCapture("applications/Traffic/static/Footage.png")
     # vid_writer = cv.VideoWriter(outputFile, cv.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10,
     #                             (round(cap.get(cv.CAP_PROP_FRAME_WIDTH)), round(cap.get(cv.CAP_PROP_FRAME_HEIGHT))))
     while True:

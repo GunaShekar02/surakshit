@@ -24,7 +24,7 @@ nav {
   padding-right: 3vw;
   transition: all 0.5s ease;
   overflow: hidden;
-  font-family: "Nunito";
+  font-family: 'Nunito';
   font-size: 55px;
   color: #224abe;
   font-weight: bold;
@@ -61,14 +61,14 @@ nav {
 .control-panel {
   color: #5a5c69;
   font-size: 45px;
-  font-family: "Nunito";
+  font-family: 'Nunito';
   text-decoration: underline;
   font-weight: bold;
 }
 
 .form-container {
   margin-top: 30px;
-  font-family: "Nunito";
+  font-family: 'Nunito';
   font-size: 30px;
   color: #224abe;
   font-weight: 600;
@@ -117,13 +117,13 @@ form button {
   border-radius: 5px;
   border: none;
   font-size: 20px;
-  font-family: "Nunito";
+  font-family: 'Nunito';
   cursor: pointer;
 }
 
 .report-container {
   margin-top: 30px;
-  font-family: "Nunito";
+  font-family: 'Nunito';
   font-size: 30px;
   /* background-color: #224abe; */
   display: flex;
@@ -198,7 +198,7 @@ form button {
   border: none;
   font-size: 25px;
   font-weight: bold;
-  font-family: "Nunito";
+  font-family: 'Nunito';
   cursor: pointer;
 }
 
@@ -214,4 +214,5 @@ form button {
   display: flex;
   border-radius: 20px;
   max-height: 45vh;
+  min-height: 40vh;
 }

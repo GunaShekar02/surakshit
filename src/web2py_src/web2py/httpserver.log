@@ -226,3 +226,5 @@
 127.0.0.1, 2020-01-21 02:45:40, POST, /Traffic/default/call/json/final, HTTP/1.1, 200, 5.133603
 127.0.0.1, 2020-01-21 02:48:09, POST, /Traffic/default/call/json/final, HTTP/1.1, 200, 17.720176
 127.0.0.1, 2020-01-21 02:50:58, POST, /Traffic/default/call/json/final, HTTP/1.1, 200, 52.445240
+127.0.0.1, 2020-01-21 08:19:40, OPTIONS, /Traffic/default/call/json/final, HTTP/1.1, 200, 4.017172
+127.0.0.1, 2020-01-21 08:19:41, POST, /Traffic/default/call/json/final, HTTP/1.1, 200, 1.521589
